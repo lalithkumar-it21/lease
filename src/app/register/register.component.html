@@ -1,0 +1,102 @@
+<div class="message">
+    <div class="container mt-5 pt-5 d-flex justify-content-center align-items-center  ">
+        <div class="card bg-info w-50 h-50">
+            <div class="card-body">
+                <h4 class="card-title d-flex justify-content-center  text-dark">REGISTER</h4>
+                <p class="card-text d-flex justify-content-center mt-4">Enter all credentials</p>
+                <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+                    <div class="mb-3 mt-3">
+                        <div class="mb-3">
+                            <label for="uName" class="form-label">Name</label>
+                            <input type="text" class="form-control" formControlName="name" id="text" placeholder="Enter Your UserName">
+                            <div *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched"
+                              class="alert alert-danger alert-custom mt-2 mx-auto ">
+                              Username Length Must Be 5-15
+                          </div>
+                        </div>
+                          <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="Enter email" formControlName="email">
+                            <div *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched"
+                              class="alert alert-danger alert-custom mt-2 mx-auto">
+                              Valid email is required
+                          </div>
+                        </div>
+                       
+                        <div class="mb-3">
+                            <label for="roles" class="form-label">Roles</label>
+                            <select class="form-select" id="roles" formControlName="roles">
+                                <option value="Tenant"selected>Tenant(Customer)</option>
+                                <option value="Owner">Owner(Agent)</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                          @if(myForm.get("roles").value === "Tenant"){ 
+                            <div class="mb-3">
+                                <label for="contact" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="contact" placeholder="Enter Phone Number" formControlName="contact">
+                                <div *ngIf="myForm.controls['contact'].invalid && myForm.controls['contact'].touched"
+                                  class="alert alert-danger alert-custom mt-2 mx-auto">
+                                  Valid contact is required
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" placeholder="Enter Address" formControlName="address">
+                                <div *ngIf="myForm.controls['address'].invalid && myForm.controls['address'].touched"
+                                  class="alert alert-danger alert-custom mt-2 mx-auto">
+                                  Valid address is required
+                              </div>
+                            </div>
+                        } 
+
+                        @if(myForm.get("roles").value === "Owner"){ 
+                            <div class="mb-3">
+                                <label for="contact" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="contact" placeholder="Enter Phone Number" formControlName="contact">
+                                <div *ngIf="myForm.controls['contact'].invalid && myForm.controls['contact'].touched"
+                                  class="alert alert-danger alert-custom mt-2 mx-auto">
+                                  Valid contact is required
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" placeholder="Enter Address" formControlName="address">
+                                <div *ngIf="myForm.controls['address'].invalid && myForm.controls['address'].touched"
+                                  class="alert alert-danger alert-custom mt-2 mx-auto">
+                                  Valid address is required
+                              </div>
+                            </div>
+                        } 
+
+                        <div class=" mb-3">
+                            <label for="pwd" class="form-label">Password</label>
+                            <input class="form-control" id="pwd" type="password" formControlName="password"
+                                placeholder="Valid Password">
+                            <div *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched"
+                                class="alert alert-danger alert-custom mt-2 mx-auto">
+                                Password is required
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="conPwd" class="form-label">Confirm Password</label>
+                            <input class="form-control" type="password" id="conPwd" formControlName="confirmPassword"
+                                placeholder="Valid Password">
+                            <div *ngIf="myForm.controls['confirmPassword'].invalid && myForm.controls['confirmPassword'].touched"
+                                class="alert alert-danger alert-custom mt-2 mx-auto">
+                                Passwords must match
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 d-flex justify-content-center align-items-center">
+
+                        <input type="submit"  class="btn btn-dark" value="Register" [disabled]="myForm.invalid">
+                        <!-- <a href="#" routerLink="/login" class="card-link btn btn-dark">REGISTER</a> -->
+                        <input type="reset" class="btn btn-dark" name="Reset" (click)="onReset()">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

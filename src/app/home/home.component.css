@@ -1,0 +1,35 @@
+
+h1 {
+     
+    font-family: 'Poppins', sans-serif
+
+}
+/* .message{
+    /* background-image: url('/home.jpg'); 
+    background: url('https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg') no-repeat center center;
+    background-size: cover;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100vw; 
+    height: 100vh;
+    
+} */
+.message {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg') no-repeat center center;
+    background-size: cover;
+}
+.footer {
+    background-color: #12191b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.text-shadow {
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: white;
+}

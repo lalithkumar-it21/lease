@@ -1,0 +1,105 @@
+
+ 
+<nav class="navbar navbar-expand-lg bg-white  fixed-top">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand text-dark" href="#">
+            <!-- <i class="bi bi-people-fill"></i> INSURANCE -->
+            <img style="height: 35px;" src="logo.png" alt="Lease Logo">
+        </a>
+        <!-- Toggler for Mobile -->
+        <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            @if(!isLogedIn){
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="secondaryNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link text-dark" routerLink="/home" href="#">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" routerLink="/property" href="#">PROPERTY</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" routerLink="/about-us" href="#">ABOUT US</a></li>
+                    </ul>
+                </div>
+            </div>}
+@else{
+            <ul *ngIf="isLogedIn && role !== 'owner' " class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/agent-home" href="#">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/property-op" href="#">PROPERTY</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/cust-op" href="#">CUSTOMER</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/lease" href="#">LEASE</a>
+                </li>
+            </ul>
+
+            <ul *ngIf="isLogedIn && role === 'tenant' " class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/customer-home" href="#">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/property-op" href="#">Property</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/lease" href="#">LEASE</a>
+                </li>
+            </ul>
+        }
+         
+            <!-- Centered Links -->
+            <ul class="navbar-nav ms-auto">
+                @if(!isLogedIn){
+                    <li class="nav-item">
+                        <a class="nav-link text-dark"   routerLink="/login" >Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark"  routerLink="/register" href="#">Register</a>
+                    </li>    
+                }
+                @else{
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" (click)="logout()">Logout</a>
+                    </li>
+                }
+                
+                <!-- <li class="nav-item">
+                    <a class="nav-link text-dark" href="#"> | </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href=""><i class="fa-brands fa-facebook "></i></a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="#"><i class="fa-brands fa-linkedin"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark " href="#"><i class="fa-brands fa-instagram"></i></a>
+                </li> -->
+            </ul>
+            <!-- Right-Aligned Buttons -->
+            <!-- <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <button class="btn btn-outline-dark btn-sm me-2">Register</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-dark btn-sm">Log In</button>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+
+
+
+
+</nav>
+<router-outlet/>

@@ -1,0 +1,78 @@
+.quote {
+    color: rgb(118, 118, 118)
+}
+
+.message {
+    background-image: url('/about-us.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.hover-effect:hover {
+
+    background-color: #00c3ff;
+    /* Light red background on hover */
+    color: #000000;
+    /* Optional: text color change */
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+}
+.about{
+    background-image: url('/about.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.box{
+    background-color: rgb(237, 251, 255);
+}
+.custom-footer {
+    background-color: #4a4c4c; /* Midnight Purple */
+    color: #E6E6FA; /* Lavender Mist */
+  }
+ 
+  .footer-link {
+    color: #E6E6FA;
+    text-decoration: none;
+  }
+ 
+  .footer-link:hover {
+    text-decoration: underline;
+    color: #0082d9; /* Orchid */
+  }
+ 
+  .text-lavender {
+    color: #00d0ff;
+  }
+ 
+  .social-icon {
+    color: #E6E6FA;
+    margin: 0 10px;
+    font-size: 1.2rem;
+  }
+ 
+  .social-icon:hover {
+    color: #008996;
+  }
+ 
+ 

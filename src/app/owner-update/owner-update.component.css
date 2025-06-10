@@ -1,0 +1,45 @@
+/* Ensure the container is centered and uses appropriate padding */
+.container {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  
+  /* Adjust card width for better form presentation */
+  .card {
+    max-width: 700px; /* Limit the max width of the form card */
+    margin: 0 auto; /* Center the card horizontally */
+  }
+  
+  /* Form label styling */
+  .form-label {
+    font-weight: 500;
+    color: #34495e; /* Slightly darker than default text */
+  }
+  
+  /* Custom alert styling for validation */
+  .alert-custom {
+    font-size: 0.85em;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: #fce4e4; /* Light red */
+    color: #c0392b; /* Dark red */
+    border: 1px solid #c0392b;
+  }
+  
+  /* Button specific styles for professional look */
+  .btn-secondary-outline {
+    background-color: transparent;
+    color: #6c757d;
+    border: 2px solid #6c757d;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-secondary-outline:hover {
+    background-color: #6c757d;
+    color: white;
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+  }
+  
+  /* Inherit gradient styles from main design */
+  /* Assuming .btn-primary-gradient, .bg-light-gradient, .shadow-lg etc. are defined elsewhere */

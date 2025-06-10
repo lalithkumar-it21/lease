@@ -1,0 +1,78 @@
+<div class="message slide-up">
+
+    <div class="container d-flex justify-content-center align-items-center">
+        <h1 class="pt-5 mt-5 display-6 fw-bold  text-center position-relative" style="top:30px;">
+            What our customer says
+        </h1>
+    </div>
+    <p class="mt-3 pt-3 display-7 text-center position-relative quote ">
+        Reliable, fast, and hassle-free! This lease service truly puts <br> customers first — I feel secure every
+        step
+        of
+        the way while having property.
+    </p>
+    <div class="container mt-4 pt-4 d-flex justify-content-center align-items-center">
+        @for(feedback of feedbacks ; track feedback.id){
+        <div class="card hover-effect ms-3" style="width:300px; height: 200px;">
+            <div class="card-body">
+
+                <p class="card-text text-center position-relative">"{{feedback.comments}}”
+                </p>
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center">
+                <img src="profile{{feedback.id}}.jpg" height="50px" width="50px" style="border-radius: 50%;">
+                <p class="ms-3 mt-2 fw-bold">{{feedback.name}}</p>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<div class="container-fluid box d-flex justify-content-center align-items-center vh-100">
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-5   p-4">
+            <h1 class="display-5 fw-bold  text-left " style="top:30px;">
+                Helping the your dream of owning a property
+            </h1>
+            <p>We help employers take better care of their people and stand out to top talent, with modern benefits and
+                solutions to HR challenges. Unum delivers a broad set of coverages designed to meet the diverse needs of
+                today's workforce, helping the working world protect what matters most.</p>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-7  p-4 about">
+
+        </div>
+    </div>
+</div>
+<footer class="custom-footer text-white py-4">
+    <div class="container">
+        <div class="row">
+            <!-- Company Info -->
+            <div class="col-lg-6 col-md-6 mb-4 mb-md-0 text-center text-md-start">
+                <h5 class="fw-bold text-lavender">LeaseCO</h5>
+                <p>
+                    A platform designed to streamline lease operations, offering seamless management and customer interactions.
+                </p>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-lg-6 col-md-6 mb-4 mb-md-0 text-center  ms-auto">
+                <h5 class="fw-bold text-lavender">Contact Us</h5>
+                <address>
+                    <p><i class="fas fa-map-marker-alt"></i> Chennai</p>
+                    <!-- <p><i class="fas fa-phone"></i> <a href="tel:+911234567890" class="footer-link">+91 1234567890</a></p> -->
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@zentrak.com"
+                            class="footer-link">info&#64;Leaseco.com</a></p>
+                </address>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col text-center">
+                <p class="mb-0 text-lavender">&copy; 2025 Leaseco. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>

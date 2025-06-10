@@ -1,0 +1,49 @@
+.message {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url("https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg") 
+                no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.login-card {
+    background: rgba(30, 144, 255, 0.8);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    color: white;
+    width: 450px;
+}
+
+h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.form-input {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-custom {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+    transition: 0.3s;
+    border: none;
+}
+
+.btn-custom:hover {
+    background: linear-gradient(to right, #feb47b, #ff7e5f);
+    transform: scale(1.05);
+}
+
+.text-light {
+    color: white !important;
+}
