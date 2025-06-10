@@ -73,7 +73,7 @@
             <h5 class="card-title fw-bold text-dark mb-2">{{ property.propertyName }} <span class="text-muted small">(ID: {{ property.propertyId }})</span></h5>
             <p class="card-text text-muted mb-2"><i class="bi bi-geo-alt-fill me-2"></i>{{ property.address }}</p>
             <p class="card-text text-secondary-light mb-1">
-              <i class="bi bi-cash-stack me-2"></i>Rent: ₹{{ property.rentAmount | number:'1.0-0' }} / Period: {{ property.period }}
+              <i class="bi bi-cash-stack me-2"></i>Rent: ₹{{ property.rentAmount | number:'1.0-0' }} / Period(Years): {{ property.period }}
             </p>
             <p class="card-text text-small text-muted mt-2 mb-3">{{ property.propertyDetails | slice:0:100 }}...</p>
             <p class="card-text mt-2">

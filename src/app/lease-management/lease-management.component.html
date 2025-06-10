@@ -65,7 +65,7 @@
               <h5 class="card-title fw-bold text-dark mb-1">{{ lease.propertyName }} (Lease ID: {{ lease.leaseId }})</h5>
               <p class="card-text text-muted mb-2"><i class="bi bi-geo-alt-fill me-2"></i>{{ lease.propertyAddress }}</p>
               <p class="card-text text-secondary-light mb-1"><i class="bi bi-person-fill me-2"></i>Owner: <strong>{{ lease.ownerName }}</strong> | Tenant: <strong>{{ lease.tenantName }}</strong></p>
-              <p class="card-text text-secondary-light mb-1"><i class="bi bi-cash-stack me-2"></i>Rent: ₹{{ lease.rentAmount | number:'1.0-0' }} / Period(month): {{ lease.period }}</p>
+              <p class="card-text text-secondary-light mb-1"><i class="bi bi-cash-stack me-2"></i>Rent: ₹{{ lease.rentAmount | number:'1.0-0' }} / Period(year): {{ lease.period }}</p>
               <p class="card-text text-secondary-light mb-1"><i class="bi bi-calendar-check me-2"></i>Dates: {{ lease.startDate }} - {{ lease.endDate }}</p>
               <p class="card-text text-small text-muted mt-2">{{ lease.agreementDetails | slice:0:100 }}...</p>
               <p class="card-text mt-2">

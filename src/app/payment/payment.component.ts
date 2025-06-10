@@ -268,12 +268,12 @@ export class PaymentComponent implements OnInit {
 
         // Calculate startDate and endDate
         const today = new Date();
-        const startDateFormatted = this.datePipe.transform(today, 'dd/MM/yyyy') || '';
+        const startDateFormatted = this.datePipe.transform(today, 'dd/MM/YYYY') || '';
 
         const endDate = new Date(today);
         // Correct calculation: period is in months. endDate is startDate + period months.
-        endDate.setMonth(endDate.getMonth() + this.period!);
-        const endDateFormatted = this.datePipe.transform(endDate, 'dd/MM/yyyy') || '';
+        endDate.setFullYear(endDate.getFullYear() + this.period!);
+        const endDateFormatted = this.datePipe.transform(endDate, 'dd/MM/YYYY') || '';
 
         const leasePayload: LeaseCreatePayload = {
           propertyId: this.propertyId!,

@@ -51,11 +51,11 @@
   
             <!-- Period -->
             <div class="col-md-6">
-              <label for="period" class="form-label text-dark fw-semibold">Period (months)</label>
+              <label for="period" class="form-label text-dark fw-semibold">Period (Years)</label>
               <input type="number" class="form-control" id="period" formControlName="period" placeholder="e.g., 12">
               <div *ngIf="getFormControl('period')?.invalid && getFormControl('period')?.touched" class="alert alert-danger alert-custom mt-1">
                 <div *ngIf="getFormControl('period')?.errors?.['required']">Period is required.</div>
-                <div *ngIf="getFormControl('period')?.errors?.['min']">Period must be at least 1 month.</div>
+                <div *ngIf="getFormControl('period')?.errors?.['min']">Period must be at least 1 year.</div>
               </div>
             </div>
   
