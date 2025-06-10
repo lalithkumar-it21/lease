@@ -1,0 +1,124 @@
+/* src/app/owner-property/owner-property.component.css */
+
+/* Reusing styles from property-list.component.css for consistency */
+
+.property-list-container {
+  background-color: #f8f9fa; /* Light background */
+  min-height: 100vh;
+}
+
+.header-section {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 2rem;
+}
+
+.text-primary {
+  color: #007bff !important; /* Bootstrap primary blue */
+}
+
+.form-select, .form-control {
+  border-radius: 0.5rem;
+}
+
+.search-button, .notify-button, .add-new-button {
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.search-button {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.notify-button {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.notify-button:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+.add-new-button {
+  background-color: #28a745; /* Green for add */
+  color: white;
+  border-color: #28a744;
+}
+.add-new-button:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.property-card {
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.175) !important;
+}
+
+.property-image {
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover; /* Cover the area, crop if necessary */
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.text-secondary-light {
+  color: #5c636a; /* A slightly lighter secondary for details */
+}
+
+.badge {
+  border-radius: 0.5rem;
+  font-size: 0.85em;
+}
+
+.bg-info-subtle {
+  background-color: #cfe2ff !important; /* Bootstrap 5 info-subtle */
+  color: #055160 !important;
+}
+
+.rent-button {
+  background-color: #17a2b8; /* Info blue/teal */
+  color: white;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.rent-button:hover {
+  background-color: #138496;
+}
+
+/* Owner-specific action buttons (Delete/Edit) */
+.owner-action-button {
+  padding: 0.375rem 0.6rem; /* Smaller padding */
+  font-size: 0.875rem; /* Smaller font */
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.owner-action-button.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.owner-action-button.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}

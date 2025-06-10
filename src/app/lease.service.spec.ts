@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PropertyService } from './property.service';
+import { LeaseService } from './lease.service';
 
-describe('PropertyService', () => {
-  let service: PropertyService;
+describe('LeaseService', () => {
+  let service: LeaseService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PropertyService);
+    service = TestBed.inject(LeaseService);
   });
 
   it('should be created', () => {

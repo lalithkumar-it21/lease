@@ -1,0 +1,57 @@
+<div class="container-fluid tenant-home-container py-5 d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div class="row justify-content-center w-100">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 p-4 p-md-5 welcome-card animated-slide-in">
+          <div class="card-body text-center">
+            <i class="bi bi-house-door-fill text-primary-gradient display-3 mb-3 animate-icon-bounce"></i>
+            <h2 class="card-title text-dark fw-bold mb-2 display-6">Welcome, <span class="text-primary">{{ username || 'Valued Customer' }}</span>!</h2>
+            <p class="card-text text-secondary lead-sm">
+              Your home management hub is here. Explore properties, manage your profile, and handle your lease agreements with ease.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row justify-content-center mt-5 gx-4 gy-4 w-100">
+      <div class="col-12 col-sm-6 col-md-4 animated-fade-in delay-1">
+        <a class="card h-100 feature-card text-center shadow-hover border-0 rounded-4 d-flex flex-column justify-content-between" routerLink="/tenant-update">
+          <div class="card-body p-4">
+            <i class="bi bi-person-gear-fill display-4 text-info-gradient mb-3 animate-icon-pulse"></i>
+            <h5 class="card-title fw-bold text-dark">Manage Profile</h5>
+            <p class="card-text text-secondary-light">Update your personal and contact details, ensuring everything is current.</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0 pb-3">
+            <button class="btn btn-outline-info btn-sm" routerLink="/tenant-update">updateProfile <i class="bi bi-arrow-right"></i></button>
+          </div>
+        </a>
+      </div>
+  
+      <div class="col-12 col-sm-6 col-md-4 animated-fade-in delay-2">
+        <a class="card h-100 feature-card text-center shadow-hover border-0 rounded-4 d-flex flex-column justify-content-between" routerLink="/browse-property">
+          <div class="card-body p-4">
+            <i class="bi bi-search display-4 text-success-gradient mb-3 animate-icon-pulse"></i>
+            <h5 class="card-title fw-bold text-dark">Browse Property</h5>
+            <p class="card-text text-secondary-light">Discover new listings and find your ideal rental home that fits your needs.</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0 pb-3">
+            <button class="btn btn-outline-success btn-sm" routerLink="/property-list">Start Browse <i class="bi bi-arrow-right"></i></button>
+          </div>
+        </a>
+      </div>
+  
+      <div class="col-12 col-sm-6 col-md-4 animated-fade-in delay-3">
+        <a class="card h-100 feature-card text-center shadow-hover border-0 rounded-4 d-flex flex-column justify-content-between" routerLink="/lease-management">
+          <div class="card-body p-4">
+            <i class="bi bi-file-earmark-text-fill display-4 text-warning-gradient mb-3 animate-icon-pulse"></i>
+            <h5 class="card-title fw-bold text-dark">Lease Agreement</h5>
+            <p class="card-text text-secondary-light">Access and manage your current lease details, terms, and important documents.</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pt-0 pb-3">
+            <button class="btn btn-outline-warning btn-sm" >View Leases <i class="bi bi-arrow-right"></i></button>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>

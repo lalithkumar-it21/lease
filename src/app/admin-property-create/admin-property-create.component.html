@@ -1,0 +1,121 @@
+<!-- src/app/admin-property-create/admin-property-create.component.html -->
+<div class="property-create-container d-flex justify-content-center align-items-center py-5">
+    <div class="card property-create-card shadow-lg border-0 rounded-4">
+      <div class="card-body p-4 p-md-5">
+        <div class="text-center mb-4">
+          <i class="bi bi-house-add-fill create-icon mb-3"></i>
+          <h3 class="card-title text-dark fw-bold mb-1">Add New Property</h3>
+          <p class="card-text text-secondary lead-xsm">
+            Creating property for Owner: <strong class="text-primary">{{ ownerName || 'Loading...' }} (ID: {{ ownerId || 'N/A' }})</strong>
+          </p>
+        </div>
+  
+        <!-- Loading, Error, and Success Messages -->
+        <div *ngIf="loading" class="alert alert-info text-center" role="alert">
+          Creating property...
+        </div>
+  
+        <div *ngIf="error" class="alert alert-danger alert-custom mt-1" role="alert">
+          <strong class="font-bold">Error!</strong>
+          <span class="block sm:inline ml-2">{{ error }}</span>
+        </div>
+  
+        <div *ngIf="successMessage" class="alert alert-success alert-custom mt-1" role="alert">
+          <strong class="font-bold">Success!</strong>
+          <span class="block sm:inline ml-2">{{ successMessage }}</span>
+        </div>
+  
+        <form [formGroup]="propertyCreateForm" (ngSubmit)="onSubmit()">
+          <div class="row g-3">
+            <!-- Owner ID - Display only (auto-filled from route) -->
+            <div class="col-md-6">
+              <label for="ownerId" class="form-label text-dark fw-semibold">Owner ID</label>
+              <input type="text" class="form-control" id="ownerId" formControlName="ownerId" readonly>
+            </div>
+  
+            <!-- Property Name -->
+            <div class="col-md-6">
+              <label for="propertyName" class="form-label text-dark fw-semibold">Property Name</label>
+              <input type="text" class="form-control" id="propertyName" formControlName="propertyName" placeholder="e.g., Green Valley Apartment">
+              <div *ngIf="getFormControl('propertyName')?.invalid && getFormControl('propertyName')?.touched" class="alert alert-danger alert-custom mt-1">
+                <div *ngIf="getFormControl('propertyName')?.errors?.['required']">Property Name is required.</div>
+                <div *ngIf="getFormControl('propertyName')?.errors?.['minlength']">Property Name must be at least 3 characters.</div>
+              </div>
+            </div>
+  
+            <!-- Address -->
+            <div class="col-12">
+              <label for="address" class="form-label text-dark fw-semibold">Address</label>
+              <textarea class="form-control" id="address" formControlName="address" rows="2" placeholder="Full property address"></textarea>
+              <div *ngIf="getFormControl('address')?.invalid && getFormControl('address')?.touched" class="alert alert-danger alert-custom mt-1">
+                <div *ngIf="getFormControl('address')?.errors?.['required']">Address is required.</div>
+                <div *ngIf="getFormControl('address')?.errors?.['minlength']">Address must be at least 5 characters.</div>
+              </div>
+            </div>
+  
+            <!-- Rent Amount -->
+            <div class="col-md-6">
+              <label for="rentAmount" class="form-label text-dark fw-semibold">Rent Amount (₹)</label>
+              <input type="number" class="form-control" id="rentAmount" formControlName="rentAmount" placeholder="e.g., 25000">
+              <div *ngIf="getFormControl('rentAmount')?.invalid && getFormControl('rentAmount')?.touched" class="alert alert-danger alert-custom mt-1">
+                <div *ngIf="getFormControl('rentAmount')?.errors?.['required']">Rent amount is required.</div>
+                <div *ngIf="getFormControl('rentAmount')?.errors?.['min']">Rent amount must be greater than 0.</div>
+              </div>
+            </div>
+  
+            <!-- Period -->
+            <div class="col-md-6">
+              <label for="period" class="form-label text-dark fw-semibold">Period (Years)</label>
+              <input type="number" class="form-control" id="period" formControlName="period" placeholder="e.g., 12">
+              <div *ngIf="getFormControl('period')?.invalid && getFormControl('period')?.touched" class="alert alert-danger alert-custom mt-1">
+                <div *ngIf="getFormControl('period')?.errors?.['required']">Period is required.</div>
+                <div *ngIf="getFormControl('period')?.errors?.['min']">Period must be at least 1 month.</div>
+              </div>
+            </div>
+  
+            <!-- Image URL -->
+            <div class="col-12">
+              <label for="image" class="form-label text-dark fw-semibold">Image URL</label>
+              <input type="url" class="form-control" id="image" formControlName="image" placeholder="https://example.com/property-image.jpg">
+              <div *ngIf="getFormControl('image')?.invalid && getFormControl('image')?.touched" class="alert alert-danger alert-custom mt-1">
+                <div *ngIf="getFormControl('image')?.errors?.['required']">Image URL is required.</div>
+                <div *ngIf="getFormControl('image')?.errors?.['pattern']">Please enter a valid URL.</div>
+              </div>
+            </div>
+  
+            <!-- Property Details -->
+            <div class="col-12">
+              <label for="propertyDetails" class="form-label text-dark fw-semibold">Property Details</label>
+              <textarea class="form-control" id="propertyDetails" formControlName="propertyDetails" rows="3" placeholder="Detailed description of the property"></textarea>
+              <div *ngIf="getFormControl('propertyDetails')?.invalid && getFormControl('propertyDetails')?.touched" class="alert alert-danger alert-custom mt-1">
+                <div *ngIf="getFormControl('propertyDetails')?.errors?.['required']">Property details are required.</div>
+                <div *ngIf="getFormControl('propertyDetails')?.errors?.['minlength']">Property details must be at least 10 characters.</div>
+              </div>
+            </div>
+  
+            <!-- Availability Status Dropdown -->
+            <div class="col-md-6">
+              <label for="availabilityStatus" class="form-label text-dark fw-semibold">Availability Status</label>
+              <select class="form-select" id="availabilityStatus" formControlName="availabilityStatus">
+                <option *ngFor="let status of availabilityStatuses" [value]="status">{{ status }}</option>
+              </select>
+              <div *ngIf="getFormControl('availabilityStatus')?.invalid && getFormControl('availabilityStatus')?.touched" class="alert alert-danger alert-custom mt-1">
+                Availability status is required.
+              </div>
+            </div>
+          </div>
+  
+          <!-- Buttons -->
+          <div class="d-grid gap-2 mt-4 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary-gradient px-5 py-3 rounded-pill fw-bold shadow-sm" [disabled]="propertyCreateForm.invalid || loading">
+              <i class="bi bi-plus-circle-fill me-2"></i> {{ loading ? 'Creating...' : 'Create Property' }}
+            </button>
+            <button type="button" (click)="onCancel()" class="btn btn-secondary-outline px-5 py-3 rounded-pill fw-bold shadow-sm" [disabled]="loading">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

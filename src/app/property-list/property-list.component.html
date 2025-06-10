@@ -1,0 +1,173 @@
+<div class="container-fluid property-list-container py-4">
+    <div class="row align-items-center mb-4 header-section p-3 shadow-sm rounded-3">
+      <div class="col-12 col-md-4 mb-3 mb-md-0"><br><br>
+        <h2 class="mb-0 text-primary fw-bold">Available Properties</h2>
+        <p class="text-muted mb-0" *ngIf="authService.isTenant()">Tenant ID: {{ currentTenantId || 'N/A' }}</p>
+      </div>
+  
+      <div class="col-12 col-md-5 mb-3 mb-md-0"><br>
+        <form [formGroup]="filterForm" class="input-group">
+            
+          <input type="text" class="form-control filter-input " formControlName="propertyName" placeholder="Pname">
+          
+          <input type="text" class="form-control filter-input" formControlName="address" placeholder="Address">
+          <input type="number" class="form-control filter-input" formControlName="minRent" placeholder="Min Rent">
+          <input type="number" class="form-control filter-input" formControlName="maxRent" placeholder="Max Rent">
+          <select class="form-select filter-dropdown" formControlName="availabilityStatus">
+            <option *ngFor="let status of availabilityStatuses" [value]="status">{{ status }}</option>
+          </select>
+          <button class="btn btn-secondary filter-button" type="button" (click)="onResetFilters()">
+            <i class="bi bi-x-circle"></i> Reset
+          </button>
+        </form>
+      </div>
+  
+      <div class="col-12 col-md-3 text-end d-flex justify-content-end align-items-center"><br><br>
+        <button *ngIf="authService.isTenant()" class="btn btn-outline-primary me-2 filter-button"
+                (click)="onToggleShowRequestedProperties()"
+                [ngClass]="{'active': showRequestedProperties}">
+          <i class="bi bi-filter-square me-2"></i> {{ showRequestedProperties ? 'Show All' : 'My Requests' }}
+        </button>
+  
+        <button *ngIf="authService.isTenant() && notifications.length > 0" class="btn btn-warning notification-button position-relative" (click)="onNotifyClick()">
+          <i class="bi bi-bell-fill"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ notifications.length }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  
+    <div *ngIf="notifications.length > 0" class="notification-area mb-3">
+      <div *ngFor="let notification of notifications" class="alert animate__animated animate__fadeInRight animate__faster"
+           [ngClass]="{'alert-success': notification.type === 'success', 'alert-danger': notification.type === 'danger'}" role="alert">
+        {{ notification.message }}
+      </div>
+    </div>
+  
+    <div *ngIf="loading" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2 text-muted">Loading properties...</p>
+    </div>
+  
+    <div *ngIf="error" class="alert alert-danger text-center my-4">
+      {{ error }}
+    </div>
+  
+    <div *ngIf="successMessage" class="alert alert-success text-center my-4">
+      {{ successMessage }}
+    </div>
+  
+    <div *ngIf="!loading && !error && properties.length === 0" class="text-center my-5">
+      <p class="lead text-muted">No properties found matching your criteria.</p>
+    </div>
+  
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let property of properties">
+        <div class="card h-100 property-card shadow-sm border-0 rounded-3 animate__animated animate__fadeInUp">
+          <img [src]="getImageSrc(property.image)" class="card-img-top property-image" alt="Property Image">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold text-dark mb-2">{{ property.propertyName }} <span class="text-muted small">(ID: {{ property.propertyId }})</span></h5>
+            <p class="card-text text-muted mb-2"><i class="bi bi-geo-alt-fill me-2"></i>{{ property.address }}</p>
+            <p class="card-text text-secondary-light mb-1">
+              <i class="bi bi-cash-stack me-2"></i>Rent: ₹{{ property.rentAmount | number:'1.0-0' }} / Period: {{ property.period }}
+            </p>
+            <p class="card-text text-small text-muted mt-2 mb-3">{{ property.propertyDetails | slice:0:100 }}...</p>
+            <p class="card-text mt-2">
+              Status:
+              <span class="badge status-badge fw-bold py-2 px-3 rounded-pill"
+                    [ngClass]="{
+                      'bg-success': property.availabilityStatus === 'AVAILABLE',
+                      'bg-warning text-dark': property.availabilityStatus === 'OCCUPIED',
+                      'bg-danger': property.availabilityStatus === 'UNDER_MAINTENANCE'
+                    }">
+                {{ property.availabilityStatus }}
+              </span>
+            </p>
+  
+            <div class="d-flex flex-wrap justify-content-between align-items-center mt-auto pt-3 border-top">
+              <button class="btn btn-outline-info btn-sm me-2 mb-2" (click)="onViewOwnerDetails(property.ownerId)" title="View Owner Details">
+                <i class="bi bi-person-circle me-1"></i> Owner
+              </button>
+  
+              <ng-container *ngIf="authService.isTenant() && currentTenantId">
+                <ng-container *ngIf="!property.hasTenantRequested">
+                  <button
+                    class="btn btn-primary btn-sm mb-2"
+                    (click)="onRequestProperty(property)"
+                    [disabled]="property.availabilityStatus !== 'AVAILABLE' || loading"
+                    title="Send Request to Owner"
+                  >
+                    <i class="bi bi-send-fill me-1"></i> Send Request
+                  </button>
+                </ng-container>
+  
+                <ng-container *ngIf="property.hasTenantRequested">
+                  <span class="badge rounded-pill py-2 px-3 mb-2 me-2"
+                        [ngClass]="{
+                          'bg-warning text-dark': property.tenantRequestStatus === 'PENDING',
+                          'bg-success': property.tenantRequestStatus === 'APPROVED',
+                          'bg-danger': property.tenantRequestStatus === 'REJECTED'
+                        }">
+                    Request: {{ property.tenantRequestStatus }}
+                  </span>
+                  <button
+                    *ngIf="property.tenantRequestStatus === 'PENDING' || 'REJECTED'"
+                    class="btn btn-outline-danger btn-sm mb-2"
+                    (click)="onDeleteRequest(property.propertyId)"
+                    title="Cancel Pending Request"
+                  >
+                    <i class="bi bi-x-circle-fill me-1"></i> Cancel Request
+                  </button>
+                  
+                  <button
+                    class="btn btn-success btn-sm mb-2 ms-md-2"
+                    (click)="onRentNow(property)"
+                    [disabled]="property.availabilityStatus !== 'AVAILABLE' || property.tenantRequestStatus !== 'APPROVED' || loading"
+                    title="Proceed to Pay and Rent Property (Requires Approved Request)"
+                  >
+                    <i class="bi bi-wallet-fill me-1"></i> Rent Now (Pay: ₹{{ property.rentAmount | number:'1.0-0' }})
+                  </button>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showOwnerDetailsModal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow-lg">
+          <div class="modal-header border-bottom-0">
+            <h5 class="modal-title fw-bold text-info">Owner Details</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="closeOwnerDetailsModal()"></button>
+          </div>
+          <div class="modal-body p-4">
+            <div *ngIf="ownerDetailsLoading" class="text-center my-3">
+              <div class="spinner-border text-info" role="status"></div>
+              <p class="mt-2 text-muted">Loading owner details...</p>
+            </div>
+            <div *ngIf="ownerDetailsError" class="alert alert-danger text-center my-3">
+              {{ ownerDetailsError }}
+            </div>
+            <ng-container *ngIf="selectedOwner && !ownerDetailsLoading">
+              <p class="mb-2"><strong class="text-dark">ID:</strong> {{ selectedOwner.ownerId }}</p>
+              <p class="mb-2"><strong class="text-dark">Name:</strong> {{ selectedOwner.name }}</p>
+              <p class="mb-2"><strong class="text-dark">Email:</strong> {{ selectedOwner.email }}</p>
+              <p class="mb-2"><strong class="text-dark">Contact:</strong> {{ selectedOwner.contact }}</p>
+              <p class="mb-0"><strong class="text-dark">Address:</strong> {{ selectedOwner.address }}</p>
+            </ng-container>
+          </div>
+          <div class="modal-footer flex-column border-top-0">
+            <button type="button" class="btn btn-primary w-100 mx-0" (click)="closeOwnerDetailsModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal-backdrop fade" [ngClass]="{'show': showOwnerDetailsModal}" *ngIf="showOwnerDetailsModal"></div>
+  </div>

@@ -2,72 +2,115 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CommonService } from '../common.service';
+import { CommonService } from '../common.service'; // Assuming this exists
 import { RegisterserviceService } from '../registerservice.service';
 
 @Component({
   selector: 'register',
-  imports: [RouterLink,ReactiveFormsModule,CommonModule],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  myForm:FormGroup;
-  custRole:boolean;
-  constructor(private router:Router,private fb:FormBuilder,private commonService:CommonService,private regService:RegisterserviceService){
+  myForm: FormGroup;
+  custRole: boolean;
+  constructor(private router: Router, private fb: FormBuilder, private commonService: CommonService, private regService: RegisterserviceService) {
 
   }
   ngOnInit(): void {
     this.myForm = this.fb.group({
-      name:['',[Validators.required,Validators.minLength(4),Validators.maxLength(15)]],
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required]],
-      confirmPassword:['',[Validators.required]],
-      roles:['',[Validators.required]],
-      contact:[''],
-      address:[''],
-     
-    },{validator:this.passwordMatchValidator})
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      roles: ['', [Validators.required]],
+      contact: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+
+    }, { validator: this.passwordMatchValidator })
+
+    // Add conditional validators for contact and address based on roles
+    this.myForm.get('roles')?.valueChanges.subscribe(role => {
+      const contactControl = this.myForm.get('contact');
+      const addressControl = this.myForm.get('address');
+
+      if (role === 'tenant' || role === 'owner') {
+        contactControl?.setValidators([Validators.required, Validators.pattern(/^\d{10}$/)]); // Example: 10-digit phone number
+        addressControl?.setValidators(Validators.required);
+      } else {
+        contactControl?.clearValidators();
+        addressControl?.clearValidators();
+      }
+      contactControl?.updateValueAndValidity();
+      addressControl?.updateValueAndValidity();
+    });
   }
 
-  passwordMatchValidator(form : FormGroup){
-    const password = form.get("password").value;
-    const conPassword = form.get("confirmPassword").value;
-    return password === conPassword ? null :{mismatch:true}
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get("password")?.value;
+    const conPassword = form.get("confirmPassword")?.value;
+    return password === conPassword ? null : { mismatch: true }
   }
-  onReset() :void{
+  onReset(): void {
     this.myForm.reset();
   }
-  submit(form) : void{
-    if(this.myForm.valid){
-      const role = this.myForm.get('roles') ?.value;
+  submit(form): void {
+    if (this.myForm.valid) {
+      const role = this.myForm.get('roles')?.value;
       console.log(role)
-      if(role == "Tenant"){
-          this.submitTenant(form);
+      if (role == "tenant") {
+        this.submitTenant(form);
       }
-      else{
+      else if(role == "admin") {
+        this.submitRegisterUser(form);
+      }
+
+      else {
         this.submitOwner(form);
       }
-      
+
       // this.commonService.onSubmit(form)
     }
   }
-  submitTenant(form):void{
+  submitTenant(form): void {
     console.log("inside submit customer", form.value);
-   
-    this.regService.registerBoth1(form.value).subscribe(response => {console.log(response)})
-    
-    const role=form.value.roles
-    console.log(role)
-    this.router.navigate(["/login"]);
+
+    this.regService.registerBoth1(form.value).subscribe(response => {
+      console.log(response);
+      alert('Tenant registration successful!'); // User feedback
+      this.router.navigate(["/login"]);
+    },
+      error => {
+        console.error("Tenant registration failed:", error);
+        alert('Tenant registration failed. Please try again.'); // User feedback
+      });
   }
-  submitOwner(form):void{
+
+  submitRegisterUser(form): void {
+    console.log("inside submit Admin", form.value);
+
+    this.regService.registerUser(form.value).subscribe(response => {
+      console.log(response);
+      alert('Admin registration successful!'); // User feedback
+      this.router.navigate(["/login"]);
+    },
+      error => {
+        console.error("Admin registration failed:", error);
+        alert('Admin registration failed. Please try again.'); // User feedback
+      });
+  }
+  
+  submitOwner(form): void {
     console.log("inside submit Agent", form.value);
-   
-    this.regService.registerBoth2(form.value).subscribe(response => {console.log(response)})
-    
-    const role=form.value.roles
-    console.log(role)
-    this.router.navigate(["/login"]);
+
+    this.regService.registerBoth2(form.value).subscribe(response => {
+      console.log(response);
+      alert('Owner registration successful!'); // User feedback
+      this.router.navigate(["/login"]);
+    },
+      error => {
+        console.error("Owner registration failed:", error);
+        alert('Owner registration failed. Please try again.'); // User feedback
+      });
   }
 }

@@ -1,49 +1,114 @@
-.message {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url("https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg") 
-                no-repeat center center;
+/* Overall page background, matching dashboard body background */
+.login-container {
+    background: url('https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg') no-repeat center center;
     background-size: cover;
-    height: 100vh;
-}
-
-.login-card {
-    background: rgba(30, 144, 255, 0.8);
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #343a40;
+    min-height: 125vh; /* Ensure it covers full viewport height */
+    padding: 20px 0; /* Add some vertical padding to the container */
+    align-items: center; /
+  }
+  
+  /* Card Styling, mirroring dashboard cards */
+  .login-card {
+    max-width: 380px; /* **Significantly decreased max-width for a much shorter card** */
+    width: 90%; /* Responsive width */
+    background: linear-gradient(135deg, #fefefe 0%, #f0f4f8 100%);
     border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    color: white;
-    width: 450px;
-}
-
-h4 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.form-input {
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.btn-custom {
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    padding: 12px;
-    width: 100%;
-    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Slightly softer shadow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .login-card:hover {
+    transform: translateY(-5px); /* Hover effect from dashboard cards */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Hover shadow from dashboard cards */
+  }
+  
+  /* Login Icon Styling */
+  .login-icon {
+    font-size: 4rem; /* Larger icon */
+    color: #3498db; /* Primary color from dashboard's .text-primary */
+  }
+  
+  /* Custom Text Colors, matching dashboard where possible */
+  .text-dark {
+    color: #212529 !important; /* Darker text for headings */
+  }
+  
+  .text-secondary {
+    color: #555 !important; /* Lighter text for descriptions/hints */
+  }
+  
+  .text-secondary-light {
+    color: #6c757d !important; /* For the "Don't have an account?" text */
+  }
+  
+  .lead-small {
+    font-size: 1.05rem; /* Slightly smaller lead text for login description */
+    line-height: 1.5;
+  }
+  
+  /* Input Group and Form Control Styling */
+  .input-group-lg .form-control,
+  .input-group-lg .input-group-text {
+    padding: 0.8rem 1rem; /* Larger padding for better touch targets */
+    font-size: 1.15rem; /* Larger font size */
+  }
+  
+  .form-control {
+    border-color: #ced4da; /* Default border color */
+    border-radius: 8px; /* Rounded input fields */
+  }
+  
+  .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Focus glow */
+  }
+  
+  .input-group-text {
+    background-color: #e9ecef; /* Light background for the icon part */
+    border-right: none;
+    border-radius: 8px 0 0 8px; /* Rounded only on the left for the icon */
+  }
+  
+  .input-group > .form-control:not(:last-child) {
+    border-top-left-radius: 0; /* Remove left rounding if input follows icon */
+    border-bottom-left-radius: 0;
+  }
+  
+  /* Specific border-radius for input when part of input-group-lg to match icon */
+  .input-group-lg > .form-control:not(:last-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .input-group-lg > .form-control:last-child {
+    border-top-right-radius: 8px; /* Ensure input itself is rounded on the right */
+    border-bottom-right-radius: 8px;
+  }
+  
+  
+  /* Primary Button with Gradient, matching dashboard buttons */
+  .btn-primary-gradient {
+    background: linear-gradient(45deg, #3498db, #2980b9); /* Blue gradient from dashboard */
     border: none;
-}
-
-.btn-custom:hover {
-    background: linear-gradient(to right, #feb47b, #ff7e5f);
-    transform: scale(1.05);
-}
-
-.text-light {
-    color: white !important;
-}
+    color: white;
+    padding: 0.8rem 1.5rem; /* Consistent button padding */
+    border-radius: 8px; /* Consistent button rounded corners */
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-primary-gradient:hover {
+    background: linear-gradient(45deg, #2980b9, #3498db); /* Inverse gradient on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); /* Hover shadow from dashboard */
+  }
+  
+  /* Link Style for "Register Now", matching dashboard's text-primary */
+  .text-primary-link {
+    color: #3498db !important;
+  }
+  
+  .hover-underline:hover {
+    text-decoration: underline !important;
+  }

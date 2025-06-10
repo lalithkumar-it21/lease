@@ -1,0 +1,83 @@
+/* src/app/property-create/property-create.component.css */
+
+/* Container styling, consistent with other update forms */
+.property-create-container {
+    min-height: 100vh; /* Use 100vh for property creation */
+    background: linear-gradient(to right, #e6f7ff, #ffffff); /* Light blue subtle gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem; /* py-5 equivalent */
+    padding-bottom: 3rem; /* py-5 equivalent */
+  }
+  
+  /* Card styling, consistent with other update forms */
+  .property-create-card {
+    max-width: 600px; /* Max width for the form card */
+    width: 100%;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Stronger shadow */
+  }
+  
+  /* Icon styling */
+  .update-icon {
+    font-size: 3rem; /* Larger icon */
+    color: #007bff; /* Primary blue color */
+  }
+  
+  /* Form label styling */
+  .form-label {
+    color: #343a40 !important; /* Darker label text */
+  }
+  
+  /* Input group styling */
+  .input-group-text {
+    background-color: #e9ecef;
+    border-right: none;
+    color: #495057;
+  }
+  
+  .form-control {
+    border-left: none;
+  }
+  
+  .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Custom alert styling for validation messages */
+  .alert-custom {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.25rem;
+  }
+  
+  /* Gradient Buttons - Primary (Add Property) */
+  .btn-primary-gradient {
+    background: linear-gradient(to right, #28a745, #218838); /* Green gradient */
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary-gradient:hover {
+    background: linear-gradient(to right, #218838, #1e7e34);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Gradient Buttons - Secondary (Reset) */
+  .btn-secondary-outline {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-secondary-outline:hover {
+    background-color: #6c757d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

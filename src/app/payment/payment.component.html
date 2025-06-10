@@ -1,0 +1,68 @@
+<!-- src/app/payment/payment.component.html -->
+<div class="payment-container d-flex justify-content-center align-items-center py-5">
+    <div class="card payment-card shadow-lg border-0 rounded-4">
+      <div class="card-body p-4 p-md-5 text-center">
+        <div class="mb-4">
+          <i class="bi bi-wallet-fill payment-icon mb-3"></i>
+          <h3 class="card-title text-dark fw-bold mb-1">Confirm Payment</h3>
+          <p class="card-text text-secondary lead-xsm">
+            You are about to make a payment for the property.
+          </p>
+        </div>
+  
+        <!-- Loading, Error, and Success Messages -->
+        <div *ngIf="loading" class="alert alert-info text-center" role="alert">
+          <div class="spinner-border spinner-border-sm text-info" role="status"></div>
+          <span class="ms-2">Loading payment details...</span>
+        </div>
+  
+        <div *ngIf="error" class="alert alert-danger alert-custom mt-1" role="alert">
+          <strong class="font-bold">Error!</strong>
+          <span class="block sm:inline ml-2">{{ error }}</span>
+        </div>
+  
+        <div *ngIf="successMessage" class="alert alert-success alert-custom mt-1" role="alert">
+          <strong class="font-bold">Success!</strong>
+          <span class="block sm:inline ml-2">{{ successMessage }}</span>
+        </div>
+  
+        <!-- Property and Payment Details Summary -->
+        <div *ngIf="propertyDetails && !loading" class="details-summary p-3 mb-4 rounded-3 shadow-sm">
+          <h5 class="fw-bold text-primary mb-3">Lease Summary</h5>
+          <div class="row text-start">
+            <div class="col-12 mb-2">
+              <strong>Property:</strong> {{ propertyDetails.propertyName }} (ID: {{ propertyId }})
+            </div>
+            <div class="col-12 mb-2">
+              <strong>Address:</strong> {{ propertyDetails.address }}
+            </div>
+            <div class="col-12 mb-2">
+              <strong>Owner:</strong> {{ ownerDetails?.name || 'N/A' }} (ID: {{ ownerId }})
+            </div>
+            <div class="col-12 mb-2">
+              <strong>Tenant:</strong> {{ tenantDetails?.name || 'N/A' }} (ID: {{ tenantId }})
+            </div>
+            <div class="col-12 mb-2">
+              <strong>Period:</strong> {{ period }} Months
+            </div>
+            <div class="col-12 fw-bold text-lg text-dark">
+              <strong>Amount:</strong> ₹{{ rentAmount | number:'1.2-2' }}
+            </div>
+          </div>
+        </div>
+  
+        <!-- Payment Button -->
+        <div class="d-grid gap-2 mt-4">
+          <button type="button" class="btn btn-primary-gradient px-5 py-3 rounded-pill fw-bold shadow-sm"
+                  (click)="initiatePayment()" [disabled]="loading || !propertyDetails || !tenantDetails">
+            <i class="bi bi-credit-card-fill me-2"></i> Pay Now with Razorpay
+          </button>
+          <button type="button" (click)="onCancel()" class="btn btn-secondary-outline px-5 py-3 rounded-pill fw-bold shadow-sm"
+                  [disabled]="loading">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

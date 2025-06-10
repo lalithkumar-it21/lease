@@ -1,0 +1,72 @@
+<div class="tenant-update-container d-flex justify-content-center align-items-center py-5">
+    <div class="card tenant-update-card shadow-lg border-0 rounded-4">
+      <div class="card-body p-4 p-md-5">
+        <div class="text-center mb-4">
+          <i class="bi bi-person-circle update-icon mb-3"></i>
+          <h3 class="card-title text-dark fw-bold mb-1">Update Tenant Profile</h3>
+          <p class="card-text text-secondary lead-xsm">Keep your information up-to-date.</p>
+        </div>
+  
+        <form [formGroup]="tenantUpdateForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="tenantId" class="form-label text-dark fw-semibold">Tenant ID</label>
+            <div class="input-group input-group-md">
+              <span class="input-group-text"><i class="bi bi-hash"></i></span>
+              <input type="text" class="form-control" id="tenantId" formControlName="tenantId" readonly>
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="name" class="form-label text-dark fw-semibold">Name</label>
+            <div class="input-group input-group-md">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" class="form-control" id="name" formControlName="name" readonly>
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="email" class="form-label text-dark fw-semibold">Email</label>
+            <div class="input-group input-group-md">
+              <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
+            </div>
+            <div *ngIf="tenantUpdateForm.controls['email'].invalid && tenantUpdateForm.controls['email'].touched" class="alert alert-danger alert-custom mt-1">
+              A valid email is required.
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="contact" class="form-label text-dark fw-semibold">Phone Number</label>
+            <div class="input-group input-group-md">
+              <span class="input-group-text"><i class="bi bi-phone"></i></span>
+              <input type="text" class="form-control" id="contact" formControlName="contact" placeholder="Enter phone number">
+            </div>
+            <div *ngIf="tenantUpdateForm.controls['contact'].invalid && tenantUpdateForm.controls['contact'].touched" class="alert alert-danger alert-custom mt-1">
+              Valid 10-digit phone number is required.
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label for="address" class="form-label text-dark fw-semibold">Address</label>
+            <div class="input-group input-group-md">
+              <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+              <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter your address">
+            </div>
+            <div *ngIf="tenantUpdateForm.controls['address'].invalid && tenantUpdateForm.controls['address'].touched" class="alert alert-danger alert-custom mt-1">
+              Valid address is required.
+            </div>
+          </div>
+  
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-primary-gradient btn-md fw-bold" [disabled]="tenantUpdateForm.invalid">
+              <i class="bi bi-check-circle me-2"></i> Update Profile
+            </button>
+            <button type="button" class="btn btn-secondary-outline btn-md fw-bold" (click)="onReset()">
+              <i class="bi bi-arrow-counterclockwise me-2"></i> Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

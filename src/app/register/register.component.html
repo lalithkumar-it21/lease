@@ -1,102 +1,99 @@
-<div class="message">
-    <div class="container mt-5 pt-5 d-flex justify-content-center align-items-center  ">
-        <div class="card bg-info w-50 h-50">
-            <div class="card-body">
-                <h4 class="card-title d-flex justify-content-center  text-dark">REGISTER</h4>
-                <p class="card-text d-flex justify-content-center mt-4">Enter all credentials</p>
-                <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
-                    <div class="mb-3 mt-3">
-                        <div class="mb-3">
-                            <label for="uName" class="form-label">Name</label>
-                            <input type="text" class="form-control" formControlName="name" id="text" placeholder="Enter Your UserName">
-                            <div *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched"
-                              class="alert alert-danger alert-custom mt-2 mx-auto ">
-                              Username Length Must Be 5-15
-                          </div>
-                        </div>
-                          <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="Enter email" formControlName="email">
-                            <div *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched"
-                              class="alert alert-danger alert-custom mt-2 mx-auto">
-                              Valid email is required
-                          </div>
-                        </div>
-                       
-                        <div class="mb-3">
-                            <label for="roles" class="form-label">Roles</label>
-                            <select class="form-select" id="roles" formControlName="roles">
-                                <option value="Tenant"selected>Tenant(Customer)</option>
-                                <option value="Owner">Owner(Agent)</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                        </div>
-                          @if(myForm.get("roles").value === "Tenant"){ 
-                            <div class="mb-3">
-                                <label for="contact" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="contact" placeholder="Enter Phone Number" formControlName="contact">
-                                <div *ngIf="myForm.controls['contact'].invalid && myForm.controls['contact'].touched"
-                                  class="alert alert-danger alert-custom mt-2 mx-auto">
-                                  Valid contact is required
-                              </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" placeholder="Enter Address" formControlName="address">
-                                <div *ngIf="myForm.controls['address'].invalid && myForm.controls['address'].touched"
-                                  class="alert alert-danger alert-custom mt-2 mx-auto">
-                                  Valid address is required
-                              </div>
-                            </div>
-                        } 
+<div class="register-container d-flex justify-content-center align-items-center vh-100 py-5">
+  <div class="card register-card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
+      <div class="text-center mb-3">
+        <i class="bi bi-person-plus-fill register-icon-sm mb-2"></i>
+        <h3 class="card-title text-dark fw-bold mb-1">Create Your Account</h3>
+        <p class="card-text text-secondary lead-xsm">Join us and start managing your properties or finding your next home!</p>
+      </div>
 
-                        @if(myForm.get("roles").value === "Owner"){ 
-                            <div class="mb-3">
-                                <label for="contact" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="contact" placeholder="Enter Phone Number" formControlName="contact">
-                                <div *ngIf="myForm.controls['contact'].invalid && myForm.controls['contact'].touched"
-                                  class="alert alert-danger alert-custom mt-2 mx-auto">
-                                  Valid contact is required
-                              </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" placeholder="Enter Address" formControlName="address">
-                                <div *ngIf="myForm.controls['address'].invalid && myForm.controls['address'].touched"
-                                  class="alert alert-danger alert-custom mt-2 mx-auto">
-                                  Valid address is required
-                              </div>
-                            </div>
-                        } 
-
-                        <div class=" mb-3">
-                            <label for="pwd" class="form-label">Password</label>
-                            <input class="form-control" id="pwd" type="password" formControlName="password"
-                                placeholder="Valid Password">
-                            <div *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched"
-                                class="alert alert-danger alert-custom mt-2 mx-auto">
-                                Password is required
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="conPwd" class="form-label">Confirm Password</label>
-                            <input class="form-control" type="password" id="conPwd" formControlName="confirmPassword"
-                                placeholder="Valid Password">
-                            <div *ngIf="myForm.controls['confirmPassword'].invalid && myForm.controls['confirmPassword'].touched"
-                                class="alert alert-danger alert-custom mt-2 mx-auto">
-                                Passwords must match
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-2 d-flex justify-content-center align-items-center">
-
-                        <input type="submit"  class="btn btn-dark" value="Register" [disabled]="myForm.invalid">
-                        <!-- <a href="#" routerLink="/login" class="card-link btn btn-dark">REGISTER</a> -->
-                        <input type="reset" class="btn btn-dark" name="Reset" (click)="onReset()">
-                    </div>
-                </form>
-            </div>
+      <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+        <div class="mb-3">
+          <label for="name" class="form-label text-dark fw-semibold">Name</label>
+          <div class="input-group input-group-md"> <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter your full name">
+          </div>
+          <div *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched" class="alert alert-danger alert-custom mt-1">
+            Name must be 5-15 characters long.
+          </div>
         </div>
 
+        <div class="mb-3">
+          <label for="email" class="form-label text-dark fw-semibold">Email</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" formControlName="email">
+          </div>
+          <div *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched" class="alert alert-danger alert-custom mt-1">
+            A valid email is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="roles" class="form-label text-dark fw-semibold">Register As</label>
+          <select class="form-select form-select-md" id="roles" formControlName="roles">
+            <option value="">Select Role</option>
+            <option value="tenant">Tenant</option>
+            <option value="owner">Owner</option>
+            <option value="admin">Admin</option>
+          </select>
+          <div *ngIf="myForm.controls['roles'].invalid && myForm.controls['roles'].touched" class="alert alert-danger alert-custom mt-1">
+            Please select a role.
+          </div>
+        </div>
+
+        @if(myForm.get("roles")?.value === "tenant" || myForm.get("roles")?.value === "owner"){
+        <div class="mb-3">
+          <label for="contact" class="form-label text-dark fw-semibold">Phone Number</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-phone"></i></span>
+            <input type="text" class="form-control" id="contact" placeholder="Enter phone number" formControlName="contact">
+          </div>
+          <div *ngIf="myForm.controls['contact'].invalid && myForm.controls['contact'].touched" class="alert alert-danger alert-custom mt-1">
+            Valid contact number is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label text-dark fw-semibold">Address</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+            <input type="text" class="form-control" id="address" placeholder="Enter your address" formControlName="address">
+          </div>
+          <div *ngIf="myForm.controls['address'].invalid && myForm.controls['address'].touched" class="alert alert-danger alert-custom mt-1">
+            Valid address is required.
+          </div>
+        </div>
+        }
+
+        <div class="mb-3">
+          <label for="password" class="form-label text-dark fw-semibold">Password</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-key"></i></span>
+            <input class="form-control" id="password" type="password" formControlName="password" placeholder="Create a strong password">
+          </div>
+          <div *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched" class="alert alert-danger alert-custom mt-1">
+            Password is required.
+          </div>
+        </div>
+
+        <div class="mb-3"> <label for="confirmPassword" class="form-label text-dark fw-semibold">Confirm Password</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+            <input class="form-control" type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password">
+          </div>
+          <div *ngIf="myForm.controls['confirmPassword'].invalid && myForm.controls['confirmPassword'].touched && myForm.hasError('mismatch')" class="alert alert-danger alert-custom mt-1">
+            Passwords must match.
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4"> <button type="submit" class="btn btn-primary-gradient btn-md fw-bold" [disabled]="myForm.invalid"> Register
+          </button>
+          <button type="button" class="btn btn-secondary-outline btn-md fw-bold" (click)="onReset()"> Reset
+          </button>
+          <p class="text-center text-secondary-light mt-3 mb-0 fs-small"> Already have an account? <a routerLink="/login" class="text-primary-link fw-semibold text-decoration-none hover-underline">Login Here</a>
+          </p>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

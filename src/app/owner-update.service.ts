@@ -1,47 +1,101 @@
-import { HttpClient } from '@angular/common/http';
+// src/app/owner-update.service.ts
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Owner } from './registerservice.service'; // Re-use the Owner interface
+import { catchError, tap, map } from 'rxjs/operators';
+import { Owner } from './registerservice.service'; // Ensure Owner interface is imported
+
+// Define the payload structure for updating an owner.
+export interface OwnerUpdatePayload {
+  name: string;
+  email: string;
+  contact: string;
+  address: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class OwnerUpdateService {
-
-  private ownerApiUrl = 'http://localhost:9092/owner'; // Base URL for owner microservice
+  private ownerBaseUrl = 'http://localhost:9092/owner'; // Adjusted to API Gateway 9092 for consistency
 
   constructor(private http: HttpClient) { }
 
   /**
-   * Fetches the current owner's profile details by ownerId.
+   * Fetches owner ID by username.
+   * Corresponds to GET http://localhost:9092/owner/id-by-name/{name}
+   * @param username The owner's username.
+   * @returns An Observable of the owner ID (number).
+   */
+  getOwnerIdByName(username: string): Observable<number> {
+    console.log(`OwnerUpdateService: Fetching owner ID for username: ${username}`);
+    return this.http.get(`${this.ownerBaseUrl}/id-by-name/${encodeURIComponent(username)}`, { responseType: 'text' }).pipe(
+      map(text => {
+        const id = parseInt(text, 10);
+        if (isNaN(id) || id <= 0) {
+          throw new Error(`Invalid owner ID received for name ${username}: ${text}`);
+        }
+        return id;
+      }),
+      tap(id => console.log('OwnerUpdateService: Received owner ID:', id)),
+      catchError(this.handleError)
+    );
+  }
+
+
+  getAllOwners(): Observable<Owner[]> {
+    console.log('OwnerService: Fetching all owners...');
+    return this.http.get<Owner[]>(`${this.ownerBaseUrl}/fetchAll`).pipe(
+      tap(owners => console.log('OwnerService: Fetched owners:', owners)),
+      catchError(this.handleError)
+    );
+  }
+  /**
+   * Fetches full owner details by owner ID.
+   * Corresponds to GET http://localhost:9092/owner/fetchById/{ownerId}
    * @param ownerId The ID of the owner to fetch.
    * @returns An Observable of the Owner object.
    */
-  getOwnerProfile(ownerId: number): Observable<Owner> {
-    // Assuming your backend has an endpoint like GET /owner/{id}
-    const url = `${this.ownerApiUrl}/${ownerId}`; // Example: GET /owner/{id}
-    return this.http.get<Owner>(url).pipe(
-      catchError(error => {
-        console.error('Error fetching owner profile by ID:', error);
-        return throwError(() => new Error('Could not fetch owner profile by ID.'));
-      })
+  getOwnerById(ownerId: number): Observable<Owner> {
+    console.log(`OwnerUpdateService: Fetching owner details for ID: ${ownerId}`);
+    return this.http.get<Owner>(`${this.ownerBaseUrl}/fetchById/${ownerId}`).pipe(
+      tap(owner => console.log('OwnerUpdateService: Received owner details:', owner)),
+      catchError(this.handleError)
     );
   }
 
   /**
-   * Sends updated owner profile data to the backend.
-   * @param ownerId The ID of the owner to update.
-   * @param updatedOwner The updated owner data.
-   * @returns An Observable of the response from the backend (e.g., success message).
+   * Updates owner details.
+   * Corresponds to PUT http://localhost:9092/owner/update/{ownerId}
+   * @param ownerId The ID of the owner to update (used in URL if endpoint is by ID).
+   * @param payload The updated Owner data.
+   * @returns An Observable of a string response (assuming backend returns text or success object).
    */
-  updateOwnerProfile(ownerId: number, updatedOwner: Partial<Owner>): Observable<any> {
-    const url = `${this.ownerApiUrl}/update/${ownerId}`; // Assuming PUT /owner/update/{id}
-    return this.http.put(url, updatedOwner, { responseType: 'text' }).pipe(
-      catchError(error => {
-        console.error('Error updating owner profile:', error);
-        return throwError(() => new Error('Could not update owner profile.'));
-      })
+  updateOwner(ownerId: number, payload: OwnerUpdatePayload): Observable<string> {
+    console.log(`OwnerUpdateService: Updating owner ID: ${ownerId} with payload:`, payload);
+    // Assuming the update endpoint is by ID, and expects payload in body
+    return this.http.put(`${this.ownerBaseUrl}/update/${ownerId}`, payload, { responseType: 'text' }).pipe(
+      tap(response => console.log('Owner update response:', response)),
+      catchError(this.handleError)
     );
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Client/Network Error: ${error.error.message}`;
+    } else {
+      console.error(`Backend returned code ${error.status}, body:`, error.error);
+      errorMessage = `Server Error (${error.status}): ${error.statusText || 'Unknown'}`;
+      if (typeof error.error === 'string') {
+        errorMessage += `\nDetails: ${error.error}`;
+      } else if (error.error && typeof error.error === 'object' && error.error.message) {
+        errorMessage = error.error.message;
+      } else if (error.error) {
+         errorMessage += `\nDetails: ${JSON.stringify(error.error)}`;
+      }
+    }
+    console.error('OwnerUpdateService Error:', errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

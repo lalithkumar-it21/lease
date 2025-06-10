@@ -1,0 +1,95 @@
+<!-- src/app/admin-home/admin-home.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" routerLink="/admin-home">Admin Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Navigation links can be added here if needed, or controlled by backend -->
+    </div>
+  </div>
+</nav>
+
+<div class="container my-5">
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card shadow-lg border-0 p-4 h-100 d-flex flex-column justify-content-between">
+        <div>
+          <h5 class="text-dark mb-4 fw-bold text-center">Quick Actions</h5>
+          <button class="btn btn-primary-gradient w-100 my-2 py-2" routerLink="/admin-property">
+            <i class="bi bi-house-door me-2"></i> Manage Properties
+          </button>
+          <button class="btn btn-info-gradient w-100 my-2 py-2" routerLink="/lease-management">
+            <i class="bi bi-file-earmark-text me-2"></i> View Leases
+          </button>
+          <button class="btn btn-success-gradient w-100 my-2 py-2" routerLink="/admin/owners">
+            <i class="bi bi-person-circle me-2"></i> Manage Owners
+          </button>
+          <button class="btn btn-warning-gradient w-100 my-2 py-2" routerLink="/admin/tenant">
+            <i class="bi bi-person-lines-fill me-2"></i> Manage Tenants
+          </button>
+          <button class="btn btn-secondary-gradient w-100 my-2 py-2" routerLink="/register">
+            <i class="bi bi-person-plus me-2"></i> Register New User
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0 p-4 p-md-5 bg-light-gradient">
+        <h2 class="text-dark mb-3 fw-bold">Welcome Back, Admin!</h2>
+        <p class="lead text-secondary mb-4">Efficiently manage your properties, leases, owners, and tenant details all in one place.</p>
+        <hr class="my-4 border-secondary-subtle">
+        <h4 class="text-dark mb-3">Dashboard Overview</h4>
+        
+        <div *ngIf="loadingCounts" class="text-center my-3">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading counts...</span>
+          </div>
+          <p class="mt-2 text-muted">Loading data...</p>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger text-center my-3">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMessage }}
+        </div>
+
+        <div class="row text-center" *ngIf="!loadingCounts && !errorMessage">
+          <div class="col-sm-4 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm">
+              <p class="fs-5 fw-bold text-primary mb-1">{{ totalProperties }}</p>
+              <small class="text-muted">Total Properties</small>
+            </div>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm">
+              <p class="fs-5 fw-bold text-success mb-1">{{ totalLeases }}</p>
+              <small class="text-muted">Total Leases</small>
+            </div>
+          </div>
+          <!-- <div class="col-sm-4 mb-3"> -->
+            <!-- <div class="p-3 bg-white rounded shadow-sm">
+              <p class="fs-5 fw-bold text-warning mb-1">{{ totalUsers }}</p>
+              <small class="text-muted">Total Users (Owners + Tenants)</small>
+            </div> -->
+          <!-- </div> -->
+           <div class="col-sm-4 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm">
+              <p class="fs-5 fw-bold text-info mb-1">{{ totalOwners }}</p>
+              <small class="text-muted">Total Owners</small>
+            </div>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <div class="p-3 bg-white rounded shadow-sm">
+              <p class="fs-5 fw-bold text-danger mb-1">{{ totalTenants }}</p>
+              <small class="text-muted">Total Tenants</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

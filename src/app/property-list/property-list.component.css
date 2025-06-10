@@ -1,0 +1,85 @@
+/* src/app/property-list/property-list.component.css */
+
+.property-list-container {
+    background-color: #f8f9fa; /* Light background */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .header-section {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .search-bar, .filter-dropdown {
+    border-color: #ced4da;
+  }
+  
+  .search-button {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .search-button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .notify-button {
+    border-color: #6c757d;
+    color: #6c757d;
+  }
+  .notify-button:hover {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .property-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .property-image {
+    height: 200px; /* Fixed height for consistent card appearance */
+    object-fit: cover; /* Ensures image covers the area nicely */
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    color: #343a40;
+  }
+  
+  .card-text.text-muted {
+    font-size: 0.9rem;
+  }
+  
+  .card-text.text-secondary-light {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #555;
+    margin-bottom: 1rem; /* Space before rent/period */
+    max-height: 4.5em; /* Limit description height to 3 lines approx */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+  
+  .badge.bg-info-subtle {
+    background-color: #e0f7fa !important;
+    color: #00bcd4 !important;
+    font-weight: 600;
+  }
+  
+  .rent-button {
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+  }

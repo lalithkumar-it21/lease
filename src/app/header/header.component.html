@@ -4,8 +4,8 @@
     <div class="container">
         <!-- Brand -->
         <a class="navbar-brand text-dark" href="#">
-            <!-- <i class="bi bi-people-fill"></i> INSURANCE -->
-            <img style="height: 35px;" src="logo.png" alt="Lease Logo">
+         
+            <img style="height: 35px;" src="leaselogo.png" alt="Lease Logo">
         </a>
         <!-- Toggler for Mobile -->
         <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -14,41 +14,44 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            @if(!isLogedIn){
+            @if(!isLogedIn ){
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="secondaryNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"><a class="nav-link text-dark" routerLink="/home" href="#">HOME</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" routerLink="/property" href="#">PROPERTY</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link text-dark" routerLink="/property-list" href="#">PROPERTY</a></li> -->
                         <li class="nav-item"><a class="nav-link text-dark" routerLink="/about-us" href="#">ABOUT US</a></li>
                     </ul>
                 </div>
             </div>}
 @else{
-            <ul *ngIf="isLogedIn && role !== 'owner' " class="navbar-nav ms-auto">
+            <ul *ngIf="isLogedIn && role === 'owner' " class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-dark"   routerLink="/agent-home" href="#">HOME</a>
+                    <a class="nav-link text-dark"   routerLink="/owner-home" href="#">HOME</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark"   routerLink="/property-op" href="#">PROPERTY</a>
+                <!-- <li class="nav-item"> -->
+                    <!-- <a class="nav-link text-dark"   routerLink="/property-list" href="#">PROPERTY</a> -->
+                <!-- </li> -->
+                 <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/about-us" href="#">ABOUT US</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark"   routerLink="/cust-op" href="#">CUSTOMER</a>
-                </li>
-                <li class="nav-item">
+              <!--  <li class="nav-item">
                     <a class="nav-link text-dark"   routerLink="/lease" href="#">LEASE</a>
-                </li>
+                </li> -->
             </ul>
 
             <ul *ngIf="isLogedIn && role === 'tenant' " class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-dark"   routerLink="/customer-home" href="#">HOME</a>
+                    <a class="nav-link text-dark"   routerLink="/tenant-home" href="#">HOME</a>
+                </li>
+                <!-- <li class="nav-item"> -->
+                    <!-- <a class="nav-link text-dark"   routerLink="/property-list" href="#">Property</a> -->
+                <!-- </li> -->
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/about-us" href="#">ABOUT US</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark"   routerLink="/property-op" href="#">Property</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark"   routerLink="/lease" href="#">LEASE</a>
+                    <!-- <a class="nav-link text-dark"   routerLink="/lease" href="#">LEASE</a> -->
                 </li>
             </ul>
         }

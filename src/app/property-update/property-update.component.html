@@ -1,0 +1,153 @@
+<!-- src/app/property-update/property-update.component.html -->
+<div class="property-update-container d-flex justify-content-center align-items-center py-5">
+  <div class="card property-update-card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4 p-md-5">
+      <div class="text-center mb-4">
+        <i class="bi bi-house-fill update-icon mb-3"></i> <!-- Icon for property update -->
+        <h3 class="card-title text-dark fw-bold mb-1">Update Property Details</h3>
+        <p class="card-text text-secondary lead-xsm">Modify the information for your property listing.</p>
+      </div>
+
+      <!-- Loading, Error, and Success Messages -->
+      <div *ngIf="loading" class="alert alert-info text-center" role="alert">
+        Loading property details...
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger alert-custom mt-1" role="alert">
+        <strong class="font-bold">Error!</strong>
+        <span class="block sm:inline ml-2">{{ error }}</span>
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success alert-custom mt-1" role="alert">
+        <strong class="font-bold">Success!</strong>
+        <span class="block sm:inline ml-2">{{ successMessage }}</span>
+      </div>
+
+      <form [formGroup]="propertyUpdateForm" (ngSubmit)="onSubmit()">
+        <!-- Property ID - Display only -->
+        <div class="mb-3">
+          <label for="propertyId" class="form-label text-dark fw-semibold">Property ID</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-hash"></i></span>
+            <input type="text" class="form-control" id="propertyId" formControlName="propertyId" readonly>
+          </div>
+        </div>
+
+        <!-- Owner ID - Display only -->
+        <div class="mb-3">
+          <label for="ownerId" class="form-label text-dark fw-semibold">Owner ID</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+            <input type="text" class="form-control" id="ownerId" formControlName="ownerId" readonly>
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['ownerId'].invalid && propertyUpdateForm.controls['ownerId'].touched" class="alert alert-danger alert-custom mt-1">
+            Owner ID is required.
+          </div>
+        </div>
+
+        <!-- Property Name -->
+        <div class="mb-3">
+          <label for="propertyName" class="form-label text-dark fw-semibold">Property Name</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-tag-fill"></i></span>
+            <input type="text" class="form-control" id="propertyName" formControlName="propertyName" placeholder="e.g., Spacious 3BHK Apartment">
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['propertyName'].invalid && propertyUpdateForm.controls['propertyName'].touched" class="alert alert-danger alert-custom mt-1">
+            <div *ngIf="propertyUpdateForm.controls['propertyName'].errors?.['required']">Property name is required.</div>
+            <div *ngIf="propertyUpdateForm.controls['propertyName'].errors?.['minlength']">Property name must be at least 3 characters.</div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label for="address" class="form-label text-dark fw-semibold">Address</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+            <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter full address">
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['address'].invalid && propertyUpdateForm.controls['address'].touched" class="alert alert-danger alert-custom mt-1">
+            <div *ngIf="propertyUpdateForm.controls['address'].errors?.['required']">Address is required.</div>
+            <div *ngIf="propertyUpdateForm.controls['address'].errors?.['minlength']">Address must be at least 5 characters.</div>
+          </div>
+        </div>
+
+        <!-- Rent Amount -->
+        <div class="mb-3">
+          <label for="rentAmount" class="form-label text-dark fw-semibold">Rent Amount (₹)</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
+            <input type="number" class="form-control" id="rentAmount" formControlName="rentAmount" placeholder="e.g., 25000">
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['rentAmount'].invalid && propertyUpdateForm.controls['rentAmount'].touched" class="alert alert-danger alert-custom mt-1">
+            <div *ngIf="propertyUpdateForm.controls['rentAmount'].errors?.['required']">Rent amount is required.</div>
+            <div *ngIf="propertyUpdateForm.controls['rentAmount'].errors?.['min']">Rent amount must be greater than 0.</div>
+          </div>
+        </div>
+
+        <!-- Period (Months) -->
+        <div class="mb-3">
+          <label for="period" class="form-label text-dark fw-semibold">Period (Months)</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-calendar-check-fill"></i></span>
+            <input type="number" class="form-control" id="period" formControlName="period" placeholder="e.g., 12">
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['period'].invalid && propertyUpdateForm.controls['period'].touched" class="alert alert-danger alert-custom mt-1">
+            <div *ngIf="propertyUpdateForm.controls['period'].errors?.['required']">Period is required.</div>
+            <div *ngIf="propertyUpdateForm.controls['period'].errors?.['min']">Period must be greater than 0.</div>
+          </div>
+        </div>
+
+        <!-- Image URL -->
+        <div class="mb-3">
+          <label for="image" class="form-label text-dark fw-semibold">Image URL</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-image-fill"></i></span>
+            <input type="text" class="form-control" id="image" formControlName="image" placeholder="Paste image URL here">
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['image'].invalid && (propertyUpdateForm.controls['image'].dirty || propertyUpdateForm.controls['image'].touched)" class="alert alert-danger alert-custom mt-1">
+            <div *ngIf="propertyUpdateForm.controls['image'].errors?.['required']">Image URL is required.</div>
+            <div *ngIf="propertyUpdateForm.controls['image'].errors?.['pattern']">Please enter a valid URL.</div>
+          </div>
+          <img *ngIf="propertyUpdateForm.get('image')?.valid && propertyUpdateForm.get('image')?.value" [src]="propertyUpdateForm.get('image')?.value" alt="Image Preview" class="img-thumbnail mt-2" style="max-height: 150px; object-fit: cover;">
+        </div>
+
+        <!-- Property Details -->
+        <div class="mb-3">
+          <label for="propertyDetails" class="form-label text-dark fw-semibold">Property Details</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+            <textarea class="form-control" id="propertyDetails" formControlName="propertyDetails" rows="3" placeholder="Describe the property"></textarea>
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['propertyDetails'].invalid && (propertyUpdateForm.controls['propertyDetails'].dirty || propertyUpdateForm.controls['propertyDetails'].touched)" class="alert alert-danger alert-custom mt-1">
+            <div *ngIf="propertyUpdateForm.controls['propertyDetails'].errors?.['required']">Property details are required.</div>
+            <div *ngIf="propertyUpdateForm.controls['propertyDetails'].errors?.['minlength']">Property details must be at least 10 characters.</div>
+          </div>
+        </div>
+
+        <!-- Availability Status Dropdown -->
+        <div class="mb-3">
+          <label for="availabilityStatus" class="form-label text-dark fw-semibold">Availability Status</label>
+          <div class="input-group input-group-md">
+            <span class="input-group-text"><i class="bi bi-check-circle-fill"></i></span>
+            <select class="form-select" id="availabilityStatus" formControlName="availabilityStatus">
+              <option *ngFor="let status of availabilityStatuses" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+          <div *ngIf="propertyUpdateForm.controls['availabilityStatus'].invalid && propertyUpdateForm.controls['availabilityStatus'].touched" class="alert alert-danger alert-custom mt-1">
+            Availability status is required.
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-grid gap-2 mt-4">
+          <button type="submit" class="btn btn-primary-gradient btn-md fw-bold" [disabled]="propertyUpdateForm.invalid || loading">
+            <i class="bi bi-check-circle-fill me-2"></i> {{ loading ? 'Updating...' : 'Update Property' }}
+          </button>
+          <button type="button" (click)="onReset()" class="btn btn-secondary-outline btn-md fw-bold" [disabled]="loading">
+            <i class="bi bi-arrow-counterclockwise me-2"></i> Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

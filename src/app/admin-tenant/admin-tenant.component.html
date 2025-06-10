@@ -1,0 +1,169 @@
+<!-- src/app/admin-tenant/admin-tenant.component.html -->
+<div class="container-fluid admin-tenant-container py-4">
+    <div class="row align-items-center mb-4 header-section p-3 shadow-sm rounded-3">
+      <div class="col-12 col-md-6"><br><br>
+        <h2 class="mb-0 text-primary fw-bold">Manage Tenants</h2>
+        <p class="text-muted mb-0">View, edit, and delete tenant records.</p>
+      </div>
+      <div class="col-12 col-md-6 text-end"><br><br>
+        <form [formGroup]="filterForm" class="input-group justify-content-end">
+          <input type="text" class="form-control filter-input me-2" formControlName="name" placeholder="Name">
+          <input type="text" class="form-control filter-input me-2" formControlName="email" placeholder="Email">
+          <input type="text" class="form-control filter-input me-2" formControlName="contact" placeholder="Contact">
+          <input type="text" class="form-control filter-input" formControlName="address" placeholder="Address">
+          <button class="btn btn-secondary filter-button ms-2" type="button" (click)="onResetFilters()">
+            <i class="bi bi-x-circle"></i> Reset Filters
+          </button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Messages: Loading, Error, Success -->
+    <div *ngIf="loading" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2 text-muted">Loading tenant data...</p>
+    </div>
+  
+    <div *ngIf="error" class="alert alert-danger text-center my-4">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ error }}
+    </div>
+  
+    <div *ngIf="successMessage" class="alert alert-success text-center my-4">
+      <i class="bi bi-check-circle-fill me-2"></i> {{ successMessage }}
+    </div>
+  
+    <div *ngIf="!loading && !error && filteredTenants.length === 0" class="text-center my-5">
+      <p class="lead text-muted">No tenants found matching your criteria.</p>
+    </div>
+  
+    <!-- Tenant List (Card View for Responsiveness) -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="!loading && !error && filteredTenants.length > 0">
+      <div class="col" *ngFor="let tenant of filteredTenants">
+        <div class="card h-100 tenant-card shadow-sm border-0 rounded-3 animate__animated animate__fadeInUp">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold text-dark mb-2">
+              <i class="bi bi-person-fill me-2 text-primary"></i> {{ tenant.name }}
+              <span class="text-muted small">(ID: {{ tenant.tenantId }})</span>
+            </h5>
+            <p class="card-text text-muted mb-1">
+              <i class="bi bi-envelope-fill me-2"></i> {{ tenant.email }}
+            </p>
+            <p class="card-text text-muted mb-1">
+              <i class="bi bi-phone-fill me-2"></i> {{ tenant.contact }}
+            </p>
+            <p class="card-text text-muted mb-3">
+              <i class="bi bi-house-fill me-2"></i> {{ tenant.address }}
+            </p>
+  
+            <div class="d-flex justify-content-end mt-auto pt-3 border-top">
+              <button class="btn btn-outline-primary btn-sm me-2" (click)="openEditModal(tenant)" title="Edit Tenant">
+                <i class="bi bi-pencil-square"></i> Edit
+              </button>
+              <button class="btn btn-outline-danger btn-sm" (click)="openDeleteConfirmModal(tenant.tenantId!)" title="Delete Tenant">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Edit Tenant Modal -->
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showEditModal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow-lg">
+          <div class="modal-header border-bottom-0">
+            <h5 class="modal-title fw-bold text-primary">Edit Tenant Details</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="closeEditModal()"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form [formGroup]="editTenantForm" (ngSubmit)="onUpdateTenant()">
+              <div class="mb-3">
+                <label for="tenantId" class="form-label">Tenant ID</label>
+                <input type="text" id="tenantId" formControlName="tenantId" class="form-control" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" formControlName="name" class="form-control" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" formControlName="email" class="form-control"
+                       [ngClass]="{'is-invalid': editTenantForm.get('email')?.invalid && editTenantForm.get('email')?.touched}">
+                <div *ngIf="editTenantForm.get('email')?.invalid && editTenantForm.get('email')?.touched" class="invalid-feedback">
+                  <span *ngIf="editTenantForm.get('email')?.errors?.['required']">Email is required.</span>
+                  <span *ngIf="editTenantForm.get('email')?.errors?.['email']">Enter a valid email address.</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="contact" class="form-label">Contact</label>
+                <input type="text" id="contact" formControlName="contact" class="form-control"
+                       [ngClass]="{'is-invalid': editTenantForm.get('contact')?.invalid && editTenantForm.get('contact')?.touched}">
+                <div *ngIf="editTenantForm.get('contact')?.invalid && editTenantForm.get('contact')?.touched" class="invalid-feedback">
+                  <span *ngIf="editTenantForm.get('contact')?.errors?.['required']">Contact is required.</span>
+                  <span *ngIf="editTenantForm.get('contact')?.errors?.['pattern']">Enter a 10-digit phone number.</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea id="address" formControlName="address" class="form-control" rows="3"
+                          [ngClass]="{'is-invalid': editTenantForm.get('address')?.invalid && editTenantForm.get('address')?.touched}"></textarea>
+                <div *ngIf="editTenantForm.get('address')?.invalid && editTenantForm.get('address')?.touched" class="invalid-feedback">
+                  Address is required.
+                </div>
+              </div>
+  
+              <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-primary-gradient py-2" [disabled]="loading || editTenantForm.invalid">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Update Tenant
+                </button>
+                <button type="button" class="btn btn-secondary-outline py-2" (click)="closeEditModal()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Custom Message / Confirmation Modal -->
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showCustomMessageModal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow-lg">
+          <div class="modal-header border-bottom-0" [ngClass]="{
+            'bg-success-subtle': customMessageType === 'success',
+            'bg-danger-subtle': customMessageType === 'error',
+            'bg-info-subtle': customMessageType === 'info' || customMessageType === 'confirm'
+          }">
+            <h5 class="modal-title fw-bold" [ngClass]="{
+              'text-success': customMessageType === 'success',
+              'text-danger': customMessageType === 'error',
+              'text-info': customMessageType === 'info' || customMessageType === 'confirm'
+            }">
+              <i class="bi me-2" [ngClass]="{
+                'bi-check-circle-fill': customMessageType === 'success',
+                'bi-x-circle-fill': customMessageType === 'error',
+                'bi-info-circle-fill': customMessageType === 'info',
+                'bi-exclamation-circle-fill': customMessageType === 'confirm'
+              }"></i>
+              {{ customMessageTitle }}
+            </h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="closeCustomMessageModal()"></button>
+          </div>
+          <div class="modal-body p-4 text-center">
+            <p class="lead">{{ customMessageContent }}</p>
+          </div>
+          <div class="modal-footer flex-column border-top-0">
+            <button *ngIf="customMessageType === 'confirm'" type="button" class="btn btn-danger w-100 mb-2" (click)="executeConfirmAction()">Confirm</button>
+            <button type="button" class="btn btn-primary-gradient w-100" (click)="closeCustomMessageModal()">{{ customMessageType === 'confirm' ? 'Cancel' : 'OK' }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal Backdrop -->
+    <div class="modal-backdrop fade" [ngClass]="{'show': showEditModal || showCustomMessageModal}" *ngIf="showEditModal || showCustomMessageModal"></div>
+  </div>
+  

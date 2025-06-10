@@ -1,0 +1,187 @@
+/* src/app/admin-tenant/admin-tenant.component.css */
+
+.admin-tenant-container {
+    background: #f8f9fa; /* Light background for the page */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header-section {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.header-section h2 {
+    color: #007bff;
+    font-weight: 700;
+}
+
+.filter-input, .filter-dropdown {
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+}
+
+.filter-button {
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+/* Card Styling */
+.tenant-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.tenant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.3rem;
+    color: #343a40;
+}
+
+.card-text i {
+    color: #6c757d;
+    min-width: 20px; /* Align icons */
+}
+
+/* Button Styling (reused from PaymentComponent for consistency) */
+.btn-primary-gradient {
+    background: linear-gradient(to right, #007bff, #0056b3);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.btn-primary-gradient:hover {
+    background: linear-gradient(to right, #0056b3, #004085);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary-outline {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+    background-color: transparent;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-outline:hover {
+    background-color: #6c757d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styling */
+.modal {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+    display: flex; /* Use flex to center */
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Fix to viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1050; /* Above most content */
+}
+
+.modal-dialog {
+    max-width: 500px; /* Max width for consistency */
+    margin: 1.75rem auto;
+    transform: translateY(-50px); /* Initial offset for animation */
+    transition: transform 0.3s ease-out;
+}
+
+.modal-backdrop.show {
+    opacity: 0.5;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0); /* Animate to center */
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: none;
+    background-color: #f8f9fa; /* Light header background */
+}
+
+.modal-title {
+    font-weight: 700;
+    color: #007bff;
+}
+
+.modal-body {
+    padding: 2rem;
+    font-size: 1.05rem;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: none;
+    background-color: #f8f9fa;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 1040;
+    transition: opacity 0.15s linear;
+}
+
+/* Form specific styling for modals */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-control:read-only {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Specific button styling for modal */
+.modal .btn-primary-gradient,
+.modal .btn-secondary-outline {
+    border-radius: 0.75rem; /* Slightly less rounded for modal buttons */
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+}
+
+/* Custom Message Modal colors */
+.bg-success-subtle { background-color: #d4edda; }
+.text-success { color: #155724; }
+.bg-danger-subtle { background-color: #f8d7da; }
+.text-danger { color: #721c24; }
+.bg-info-subtle { background-color: #d1ecf1; }
+.text-info { color: #0c5460; }

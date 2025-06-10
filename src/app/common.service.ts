@@ -22,11 +22,13 @@ export class CommonService {
     
     if(form.value.userName == un && form.value.password == pwd){
       this.isLogedIn=true;
-      this.router.navigate(["/insurance"])
+      this.router.navigate(["/home"])
       return this.isLogedIn
       
     }
   }
+
+  
   getLoginStatus():boolean{
     return this.isLogedIn;
   }
