@@ -14,7 +14,7 @@
             <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter your full name">
           </div>
           <div *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched" class="alert alert-danger alert-custom mt-1">
-            Name must be 5-15 characters long.
+            Name must be 5-25 characters long.
           </div>
         </div>
 
@@ -50,7 +50,7 @@
             <input type="text" class="form-control" id="contact" placeholder="Enter phone number" formControlName="contact">
           </div>
           <div *ngIf="myForm.controls['contact'].invalid && myForm.controls['contact'].touched" class="alert alert-danger alert-custom mt-1">
-            Valid contact number is required.
+            Valid contact  start from 6-9 of total 10 digit number is required.
           </div>
         </div>
         <div class="mb-3">
@@ -60,7 +60,7 @@
             <input type="text" class="form-control" id="address" placeholder="Enter your address" formControlName="address">
           </div>
           <div *ngIf="myForm.controls['address'].invalid && myForm.controls['address'].touched" class="alert alert-danger alert-custom mt-1">
-            Valid address is required.
+            Valid address with min 5 letters is required.
           </div>
         </div>
         }
@@ -72,8 +72,11 @@
             <input class="form-control" id="password" type="password" formControlName="password" placeholder="Create a strong password">
           </div>
           <div *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched" class="alert alert-danger alert-custom mt-1">
-            Password is required.
+           Valid Password of Min length 8 with min of 1 capital letter,1 small letter,1 number,1 special character  is required.
           </div>
+          <div *ngIf="passwordStrength">
+            <p>Password Strength: {{ passwordStrength }}</p>
+        </div>
         </div>
 
         <div class="mb-3"> <label for="confirmPassword" class="form-label text-dark fw-semibold">Confirm Password</label>
