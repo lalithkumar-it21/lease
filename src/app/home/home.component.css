@@ -1,35 +1,260 @@
+/* src/app/home/home.component.css */
 
-h1 {
-     
-    font-family: 'Poppins', sans-serif
-
-}
-/* .message{
-    /* background-image: url('/home.jpg'); 
-    background: url('https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg') no-repeat center center;
-    background-size: cover;
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    width: 100vw; 
-    height: 100vh;
+/* General Body and Font */
+body {
     
-} */
-.message {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg') no-repeat center center;
-    background-size: cover;
+    font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa; /* Light background */
 }
-.footer {
-    background-color: #12191b;
+
+/* Navbar Enhancements */
+.navbar {
+    transition: background-color 0.3s ease-in-out;
+    z-index: 1030; /* Ensure navbar is above other content */
+}
+.image{
+    background: url('https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg') no-repeat center center;
+}
+.navbar-brand {
+    color: white !important;
+    font-size: 1.8rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    transition: color 0.3s ease-in-out;
+    font-weight: 500;
+    padding: 0.5rem 1rem; /* Adjust padding for better look */
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background-color: white;
+    color: #007bff !important;
+    border-color: white;
+}
+
+
+/* Hero Section (Main Banner) */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+     url('https://cdn.prod.website-files.com/65842b54fe132c0e6b448254/658456ab143330e7a221203b_How-Much-Do-Rental-Management-Companies-Charge.jpeg') no-repeat center center;
+    background-size: cover;
+    position: relative; /* Needed for text-shadow positioning */
+    height: 100vh; /* Full viewport height */
     color: white;
     text-align: center;
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 56px; /* Offset for fixed navbar */
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-section p {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
 }
 
 .text-shadow {
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.text-shadow-sm {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.btn-hero-gradient {
+    background: linear-gradient(to right, #84b3e3, #268bf8); /* Primary gradient */
+    border: none;
     color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-hero-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(to right, #0056b3, #004085);
+}
+
+/* Section Headings */
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.text-dark-blue {
+    color: #2c3e50; /* A darker blue for headings */
+}
+
+/* Features Section */
+.features-section {
+    padding: 80px 0;
+    background-color: #f2f7ff; /* A very light blue background */
+}
+
+.feature-card {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.icon-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+}
+
+.bg-primary-subtle { background-color: #e0f0ff; } /* Lighter primary color */
+.text-primary { color: #007bff; }
+.bg-success-subtle { background-color: #e6ffe6; }
+.text-success { color: #28a745; }
+.bg-warning-subtle { background-color: #fff8e6; }
+.text-warning { color: #ffc107; }
+
+/* How It Works Section */
+.how-it-works-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+}
+
+.step-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.step-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 80px 0;
+    background-color: #e9f7fe; /* Another light background for contrast */
+}
+
+.testimonial-card {
+    background-color: white;
+    border-left: 5px solid #007bff; /* Accent border */
+    padding: 1.5rem;
+    text-align: left;
+    font-style: italic;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-card p.fw-bold {
+    font-style: normal;
+    color: #343a40;
+    text-align: right;
+    margin-top: 1rem;
+}
+
+/* Footer */
+.footer {
+    background-color: #212529; /* Darker than navbar for distinction */
+    color: rgba(255, 255, 255, 0.7);
+    padding: 40px 0;
+}
+
+.footer h5 {
+    color: white;
+    font-weight: 600;
+}
+
+.footer ul {
+    padding-left: 0;
+}
+
+.footer ul li a {
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease-in-out;
+}
+
+.footer ul li a:hover {
+    color: white;
+}
+
+.social-icons a {
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+    color: white;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .btn-hero-gradient {
+        font-size: 1rem;
+        padding: 0.8rem 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .feature-card, .step-card, .testimonial-card {
+        margin-bottom: 1.5rem;
+    }
 }

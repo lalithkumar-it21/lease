@@ -1,7 +1,167 @@
-<div class="body text-dark d-flex justify-content-center align-items-center vh-100 pt-5 message">
-    
-    <h3 class="display-3 text-uppercase text-center position-relative text-shadow">
-        Welcome to LeaseCo !!! <br><br> Have your dream home at low price
-    </h3>
-</div>
+<!-- src/app/home/home.component.html -->
+<head>
+    <!-- Favicon if you have one -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Bootstrap Icons (replace with direct Bootstrap CSS if not using CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts: Poppins (or Inter if you prefer a different one) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
 
+<!-- <div class="main-content">
+   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3 fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" routerLink="/">LeaseCo </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-3"><a class="nav-link text-white-50 hover-white" routerLink="/property-list">Properties</a></li>
+                    <li class="nav-item me-3"><a class="nav-link text-white-50 hover-white" routerLink="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link text-white-50 hover-white btn btn-outline-light btn-sm py-1 px-3 rounded-pill" routerLink="/register">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center text-white d-flex justify-content-center align-items-center vh-100">
+        <div class="container animate__animated animate__fadeInUp">
+            <h1 class="display-3 text-uppercase fw-bold text-shadow mb-4">
+                Welcome to LeaseCo !!!
+            </h1>
+            <p class="lead text-shadow-sm mb-5">
+                Your dream home at a fair price. Seamless property management and leasing solutions.
+            </p>
+            <a routerLink="/login" class="btn btn-hero-gradient btn-lg px-5 py-3 rounded-pill shadow-lg">
+                <i class="bi bi-search me-2"></i> Find Your Property
+            </a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark-blue animate__animated animate__fadeIn">Why Choose LeaseCo?</h2>
+            <div class="row g-4">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="feature-card p-4 text-center rounded-3 shadow-sm h-100">
+                        <div class="icon-circle bg-primary-subtle text-primary mb-3">
+                            <i class="bi bi-shield-check fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Verified Listings</h4>
+                        <p class="text-muted">Explore a wide range of properties, all verified for your peace of mind.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="feature-card p-4 text-center rounded-3 shadow-sm h-100">
+                        <div class="icon-circle bg-success-subtle text-success mb-3">
+                            <i class="bi bi-credit-card-fill fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Easy Payments</h4>
+                        <p class="text-muted">Secure and hassle-free online payment processing for rent and fees.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                    <div class="feature-card p-4 text-center rounded-3 shadow-sm h-100">
+                        <div class="icon-circle bg-warning-subtle text-warning mb-3">
+                            <i class="bi bi-chat-dots-fill fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Manage Requests</h4>
+                        <p class="text-muted">Owners can easily manage tenant requests, while tenants can submit issues effortlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section py-5 bg-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark-blue animate__animated animate__fadeIn">How It Works</h2>
+            <div class="row g-4 text-center">
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="step-card p-4 rounded-3 shadow-sm h-100">
+                        <div class="step-number mb-3">1</div>
+                        <h4 class="fw-bold mb-2">Register Your Account</h4>
+                        <p class="text-muted">Quickly sign up as a tenant or property owner.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="step-card p-4 rounded-3 shadow-sm h-100">
+                        <div class="step-number mb-3">2</div>
+                        <h4 class="fw-bold mb-2">Find Your Perfect Property</h4>
+                        <p class="text-muted">Browse verified listings or list your available properties.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                    <div class="step-card p-4 rounded-3 shadow-sm h-100">
+                        <div class="step-number mb-3">3</div>
+                        <h4 class="fw-bold mb-2">Lease and Manage</h4>
+                        <p class="text-muted">Sign lease agreements and manage all aspects of your rental online.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <!-- <section class="testimonials-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark-blue animate__animated animate__fadeIn">What Our Users Say</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="testimonial-card p-4 rounded-3 shadow-sm h-100">
+                        <p class="text-muted fst-italic mb-3">
+                            "LeaseCo made finding my new apartment incredibly easy and stress-free. The payment process was seamless!"
+                        </p>
+                        <p class="fw-bold mb-0">- Jane Doe, Tenant</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <div class="testimonial-card p-4 rounded-3 shadow-sm h-100">
+                        <p class="text-muted fst-italic mb-3">
+                            "Managing my properties has never been simpler. All requests and leases in one intuitive platform."
+                        </p>
+                        <p class="fw-bold mb-0">- John Smith, Property Owner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <!-- <footer class="footer bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="fw-bold mb-3">LeaseCo </h5>
+                    <p class="text-muted small">Your trusted partner in property leasing.</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a routerLink="/property-list" class="text-white-50 text-decoration-none hover-white">Browse Properties</a></li>
+                        <li><a routerLink="/login" class="text-white-50 text-decoration-none hover-white">Login</a></li>
+                        <li><a routerLink="/register" class="text-white-50 text-decoration-none hover-white">Register</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">Contact Us</h5>
+                    <p class="text-white-50 mb-1"><i class="bi bi-envelope-fill me-2"></i> info&#64;leaseco.com</p>
+                    <p class="text-white-50"><i class="bi bi-phone-fill me-2"></i> +1 234 567 8900</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white-50 mx-2 fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white-50 mx-2 fs-5"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white-50 mx-2 fs-5"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary-subtle">
+            <p class="text-muted small mb-0">&copy; {{ getCurrentYear() }} LeaseCo Hub. All rights reserved.</p>
+        </div>
+    </footer>
+</div> -->
