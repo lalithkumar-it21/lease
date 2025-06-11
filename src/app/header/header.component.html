@@ -32,6 +32,16 @@
                 <!-- <li class="nav-item"> -->
                     <!-- <a class="nav-link text-dark"   routerLink="/property-list" href="#">PROPERTY</a> -->
                 <!-- </li> -->
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/owner-property" href="#">PROPERTY</a>
+                </li>
+                <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark"   routerLink="/lease-management" href="#">LEASE</a>
+                    </li>
+                    <li class="nav-item">
+
                  <li class="nav-item">
                     <a class="nav-link text-dark"   routerLink="/about-us" href="#">ABOUT US</a>
                 </li>
@@ -47,6 +57,49 @@
                 <!-- <li class="nav-item"> -->
                     <!-- <a class="nav-link text-dark"   routerLink="/property-list" href="#">Property</a> -->
                 <!-- </li> -->
+
+                
+                <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark"   routerLink="/property-list" href="#">PROPERTY</a>
+                    </li>
+                    <li class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"   routerLink="/lease-management" href="#">LEASE</a>
+                        </li>
+                        <li class="nav-item">
+                           
+
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/about-us" href="#">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link text-dark"   routerLink="/lease" href="#">LEASE</a> -->
+                </li>
+            </ul>
+
+            <ul *ngIf="isLogedIn && role === 'admin' " class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark"   routerLink="/admin-home" href="#">HOME</a>
+                </li>
+                <!-- <li class="nav-item"> -->
+                    <!-- <a class="nav-link text-dark"   routerLink="/property-list" href="#">Property</a> -->
+                <!-- </li> -->
+
+               
+                <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark"   routerLink="/admin-property" href="#">PROPERTY</a>
+                    </li>
+                    <li class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"   routerLink="/lease-management" href="#">LEASE</a>
+                        </li>
+                        <li class="nav-item">
+                           
+
+
                 <li class="nav-item">
                     <a class="nav-link text-dark"   routerLink="/about-us" href="#">ABOUT US</a>
                 </li>
