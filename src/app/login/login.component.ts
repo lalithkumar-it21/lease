@@ -11,14 +11,13 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'login',
-  imports: [RouterLink, RouterOutlet, FormsModule, CommonModule, HeaderComponent], // Added CommonModule and HeaderComponent for standalone
+  imports: [RouterLink, RouterOutlet, FormsModule, CommonModule, HeaderComponent], 
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   constructor(private router: Router, private commonService: CommonService, private logService: LoginserviceService, private access: ActivatedRoute, private authService: AuthService) {
-    // You might want to remove HeaderComponent and RouterOutlet from imports if not directly used in login.component.html
-    // and rely on AppComponent's router-outlet.
+   
   }
 
   token: string;
